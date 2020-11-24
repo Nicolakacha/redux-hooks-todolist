@@ -4,6 +4,7 @@ import {
   TOGGLE_TODO,
   SET_FILTER,
   CLEAR_TODOS,
+  GET_TODOS,
 } from './actionTypes';
 
 export function addTodoState(content) {
@@ -30,6 +31,12 @@ export function toggleTodoState(id) {
 export function clearTodosState() {
   return {
     type: CLEAR_TODOS,
+  };
+}
+
+export function getTodosState() {
+  return {
+    type: GET_TODOS,
   };
 }
 

@@ -8,6 +8,7 @@ import {
   toggleTodoState,
   clearTodosState,
   setFilterState,
+  getTodosState,
 } from '../redux/actions';
 
 function writeTodosToLocalStorage(todos) {
@@ -24,6 +25,10 @@ export default function useTodo() {
   useEffect(() => {
     writeTodosToLocalStorage(todos);
   }, [todos]);
+
+  useEffect(() => {
+    dispatch(getTodosState());
+  }, [dispatch]);
 
   const addTodo = (e) => {
     if (inputValue.trim() !== '' && e.key === 'Enter') {
