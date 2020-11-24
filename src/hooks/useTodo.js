@@ -22,13 +22,9 @@ export default function useTodo() {
   const filter = useSelector(selectFilter);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    writeTodosToLocalStorage(todos);
-  }, [todos]);
+  useEffect(() => writeTodosToLocalStorage(todos), [todos]);
 
-  useEffect(() => {
-    dispatch(getTodosState());
-  }, [dispatch]);
+  useEffect(() => dispatch(getTodosState()), [dispatch]);
 
   const addTodo = (e) => {
     if (inputValue.trim() !== '' && e.key === 'Enter') {
@@ -37,44 +33,31 @@ export default function useTodo() {
     }
   };
 
-  const deleteTodo = (id) => {
-    dispatch(deleteTodoState(id));
-  };
+  const deleteTodo = (id) => dispatch(deleteTodoState(id));
 
-  const toggleTodo = (id) => {
-    dispatch(toggleTodoState(id));
-  };
+  const toggleTodo = (id) => dispatch(toggleTodoState(id));
 
-  const showAll = () => {
-    dispatch(setFilterState(ALL));
-  };
+  const showAll = () => dispatch(setFilterState(ALL));
 
-  const showCompleted = () => {
-    dispatch(setFilterState(COMPLETED));
-  };
+  const showCompleted = () => dispatch(setFilterState(COMPLETED));
 
-  const showUncompleted = () => {
-    dispatch(setFilterState(UNCOMPLETED));
-  };
+  const showUncompleted = () => dispatch(setFilterState(UNCOMPLETED));
 
-  const clearAll = () => {
-    dispatch(clearTodosState());
-  };
+  const clearAll = () => dispatch(clearTodosState());
 
   const showedTodos = todos.filter((todo) => {
     switch (filter) {
-      case ALL: {
+      case ALL:
         return todo;
-      }
-      case COMPLETED: {
+
+      case COMPLETED:
         return todo.isDone === true;
-      }
-      case UNCOMPLETED: {
+
+      case UNCOMPLETED:
         return todo.isDone === false;
-      }
-      default: {
+
+      default:
         return todo;
-      }
     }
   });
 
